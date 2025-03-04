@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\JobController;
+use App\Http\Controllers\BuilderJobController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ Route::prefix('v1')->group(function () {
     // Protected routes
     Route::middleware('auth:api')->group(function () {
         // Jobs routes
-        Route::get('/jobs/list', [JobController::class, 'index']);
-        Route::get('/jobs/{id}', [JobController::class, 'show']);
+        Route::get('/jobs/list', [BuilderJobController::class, 'index']);
+        Route::get('/jobs/{id}', [BuilderJobController::class, 'show']);
     });
 });

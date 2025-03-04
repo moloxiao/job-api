@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Job;
+use App\Models\BuilderJob;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Log;
 
-class JobController extends Controller
+class BuilderJobController extends Controller
 {
     /**
      * Get list of all jobs
@@ -15,8 +16,14 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::getAllJobs();
-        return response()->json($jobs);
+        try {
+            Log::info('index coming');
+            $jobs = BuilderJob::getAllBuilderJobs();
+            return response()->json($jobs);
+        } catch (\Exception $e) {
+            Log::error('Job list error: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -34,7 +41,7 @@ class JobController extends Controller
         $userName = $user->name;
 
         // Get job data from model
-        $job = Job::getJobById($id);
+        $job = BuilderJob::getBuilderJobById($id);
 
         if ($job) {
             $response = $job;
