@@ -1,6 +1,11 @@
 
 # Laravel API Demo
 
+## Daily work
+```
+php artisan serve
+```
+
 
 ## Init
 1. Install :  
